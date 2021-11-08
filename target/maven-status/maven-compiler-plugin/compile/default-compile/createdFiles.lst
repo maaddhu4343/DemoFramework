@@ -1,4 +1,6 @@
 home\LoginOrSignInPage.class
 genericLib\WebDriverCommonLib.class
 genericLib\Constants.class
+friends\FriendsPage.class
+home\WelcomePage.class
 genericLib\Browser.class
