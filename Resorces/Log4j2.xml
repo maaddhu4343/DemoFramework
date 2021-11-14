@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <Property name="basePath">./Resorces</Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <RollingFile name="File" fileName="${basePath}/LofFile.log" filePattern="${basePath}/LofFile-%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <SizeBasedTriggeringPolicy size="500" />
+        </RollingFile>
+
+    </Appenders>
+    <Loggers>
+        <!--<Logger name="com.LogExample" level="trace" >
+            <AppenderRef ref="Console"/>
+        </Logger>-->
+        <Root level="ERROR">
+            <AppenderRef ref="File"/>
+        </Root>
+    </Loggers>
+</Configuration>

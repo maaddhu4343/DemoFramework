@@ -1,5 +1,7 @@
 package genericLib;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 public class WebDriverCommonLib {
 
+    Logger log = LogManager.getLogger(WebDriverCommonLib.class.getName());
 
     public void waitForPageToLoad(){
         Browser.driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -18,12 +21,21 @@ public class WebDriverCommonLib {
         driverWait.until(ExpectedConditions.visibilityOf(element));
     }
     public void waitForElementClickable(WebElement element){
-        WebDriverWait driverWait = new WebDriverWait(Browser.driver,20);
-        driverWait.until(ExpectedConditions.elementToBeClickable(element));
+        try {
+            WebDriverWait driverWait = new WebDriverWait(Browser.driver, 20);
+            driverWait.until(ExpectedConditions.elementToBeClickable(element));
+        }catch (Exception e){
+            log.error("Failed to wait for "+element  +":::::"+e.getMessage());
+        }
+
     }
     public void clickOnElement(WebElement element){
-        waitForElementClickable(element);
-        element.click();
+        try {
+            waitForElementClickable(element);
+            element.click();
+        }catch (Exception e){
+            log.error("Failed to click on Element"+element +"   ::::::"+e.getMessage());
+        }
     }
     public void sendDataToTextBox(WebElement element,String input){
         waitForElementsPresent(element);
